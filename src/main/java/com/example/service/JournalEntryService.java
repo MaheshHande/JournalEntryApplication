@@ -48,7 +48,7 @@ public class JournalEntryService {
      oldEntry.setTitle(UpdatedEntry.getTitle() != null && UpdatedEntry.getTitle().equals("")?UpdatedEntry.getTitle() : oldEntry.getTitle());
      oldEntry.setContent(UpdatedEntry.getContent() != null && UpdatedEntry.equals("")?UpdatedEntry.getContent():oldEntry.getContent());
     }
-    journalEntryRepo.save(oldEntry);
+    // journalEntryRepo.save(oldEntry);
      return oldEntry;
     
    }
