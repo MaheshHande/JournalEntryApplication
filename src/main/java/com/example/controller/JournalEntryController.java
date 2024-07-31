@@ -47,9 +47,9 @@ public class JournalEntryController {
 
          // Deleting The Entry By Id
     @DeleteMapping("/deletebyid/{MyId}")
-    public String deleteEnteryById(@PathVariable ObjectId MyId){
+    public boolean deleteEnteryById(@PathVariable ObjectId MyId){
          journalEntryService.deletebyid(MyId);
-         return "Journal Entry Deleted Successfully ";
+        return true;
     }
 
           // Delete All Entries 
@@ -60,9 +60,14 @@ public class JournalEntryController {
  } 
 
      
-    @PutMapping("/update/{id}")
+    @PutMapping("/update/{MyId}")
     public JournalEntry updateEntryById(@PathVariable ObjectId MyId, @RequestBody JournalEntry UpdatedEntry){
-      journalEntryService.updateEntryById(MyId, UpdatedEntry);
+    JournalEntry old= journalEntryService.findById(MyId).orElse(null);
+    if(old != null){
+     old.setTitle(UpdatedEntry.getTitle() != null && !UpdatedEntry.getTitle().equals("")?UpdatedEntry.getTitle():old.getTitle());
+    old.setContent(UpdatedEntry.getContent() !=null && !UpdatedEntry.equals("")?UpdatedEntry.getContent():old.getContent());
+}
+     journalEntryService.SaveEntry(old);
       return UpdatedEntry;
 }
 

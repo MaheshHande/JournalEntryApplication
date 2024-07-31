@@ -2,13 +2,9 @@ package com.example.service;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
 import com.example.entity.JournalEntry;
 import com.example.repository.JournalEntryRepo;
 
@@ -25,32 +21,21 @@ public class JournalEntryService {
         }
     
 
-    public List<JournalEntry>ShowEntry(){                // Test Done (ShowEntry)
+    public List<JournalEntry>ShowEntry(){                
         return journalEntryRepo.findAll();
     }
 
-    public void DeleteAll(){                            // Test Done (Delete All)
+    public void DeleteAll(){                         
         journalEntryRepo.deleteAll();
     }
 
-   public Optional<JournalEntry>findById(ObjectId MyId){ // Test Done (Find By ID)
+   public Optional<JournalEntry>findById(ObjectId MyId){ 
     return journalEntryRepo.findById(MyId);
    }
 
-   public void deletebyid(ObjectId MyId){                // Test Done (Delete By ID)
+   public void deletebyid(ObjectId MyId){                
      journalEntryRepo.deleteById(MyId);
 
-   }
-
-   public JournalEntry updateEntryById(@PathVariable ObjectId MyId, @RequestBody JournalEntry UpdatedEntry){
-    JournalEntry oldEntry = journalEntryRepo.findById(MyId).orElse(null);
-    if(oldEntry!=null){
-     oldEntry.setTitle(UpdatedEntry.getTitle() != null && UpdatedEntry.getTitle().equals("")?UpdatedEntry.getTitle() : oldEntry.getTitle());
-     oldEntry.setContent(UpdatedEntry.getContent() != null && UpdatedEntry.equals("")?UpdatedEntry.getContent():oldEntry.getContent());
-    }
-    // journalEntryRepo.save(oldEntry);
-     return oldEntry;
-    
    }
  
 }
