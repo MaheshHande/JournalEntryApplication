@@ -24,18 +24,19 @@ public class JournalEntryController {
    
 
 
+        // Creating The Journal Entry 
+        @PostMapping("/createEntry")
+        public JournalEntry  createEntry(@RequestBody JournalEntry MyEntry){
+             journalEntryService.SaveEntry(MyEntry);
+             return MyEntry;
+        }
+    
+
           // Geting The All Entries 
     @GetMapping("/getall")
     public List<JournalEntry> getall(){
       return journalEntryService.ShowEntry();
    }
-
-         // Creating The Journal Entry 
-    @PostMapping("/createEntry")
-    public JournalEntry  createEntry(@RequestBody JournalEntry MyEntry){
-         journalEntryService.SaveEntry(MyEntry);
-         return MyEntry;
-    }
 
  
          // Finding The Journal Entry By Id
@@ -59,7 +60,7 @@ public class JournalEntryController {
          return "All Entries Deleted Sucessfully";
  } 
 
-     
+     // Update Journal Entry By id
     @PutMapping("/update/{MyId}")
     public JournalEntry updateEntryById(@PathVariable ObjectId MyId, @RequestBody JournalEntry UpdatedEntry){
     JournalEntry old= journalEntryService.findById(MyId).orElse(null);

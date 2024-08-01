@@ -15,24 +15,27 @@ public class JournalEntryService {
     @Autowired
     private JournalEntryRepo journalEntryRepo;
 
-
-    public void SaveEntry(JournalEntry journalEntry){ 
-            journalEntryRepo.save( journalEntry);
-        }
-    
-
+    // Get All Entries 
     public List<JournalEntry>ShowEntry(){                
         return journalEntryRepo.findAll();
     }
 
+    // Save The Entries
+    public void SaveEntry(JournalEntry journalEntry){ 
+            journalEntryRepo.save( journalEntry);
+        }
+    
+    // Delete All Entries 
     public void DeleteAll(){                         
         journalEntryRepo.deleteAll();
     }
 
+    //  Find Entries By Id
    public Optional<JournalEntry>findById(ObjectId MyId){ 
     return journalEntryRepo.findById(MyId);
    }
 
+   // Delete Entries By Id
    public void deletebyid(ObjectId MyId){                
      journalEntryRepo.deleteById(MyId);
 
